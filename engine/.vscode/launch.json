@@ -14,7 +14,7 @@
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
-            "preLaunchTask": "cl.exe build active file"
+            "preLaunchTask": "Compile"
         }
     ]
 }
