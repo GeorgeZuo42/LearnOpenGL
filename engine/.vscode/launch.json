@@ -5,16 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "cl.exe - 生成和调试活动文件",
+            "name": "Debug",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "bin\\debug\\engine.exe",
+            "program": "${command:cmake.launchTargetPath}",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole": false,
-            "preLaunchTask": "Compile"
+            "externalConsole": false
         }
     ]
 }
