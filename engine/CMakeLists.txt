@@ -16,7 +16,9 @@ file(COPY ${MY_DLL} DESTINATION ${EXECUTABLE_OUTPUT_PATH})
 
 include_directories(${PROJECT_SOURCE_DIR}/include/)
 link_directories(${PROJECT_SOURCE_DIR}/lib/)
-add_executable(engine main.cpp)
+
+# file(GLOB SOURCES "src/*.cpp")
+add_executable(engine src/main.cpp)
 
 target_link_libraries(engine glew32)
 target_link_libraries(engine glfw3dll)
