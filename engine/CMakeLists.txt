@@ -7,12 +7,18 @@ enable_testing()
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
+
 file(GLOB MY_DLL ${PROJECT_SOURCE_DIR}/lib/*.dll)
 foreach(dll IN LISTS MY_DLL)
     message("Copy ${dll}")
 endforeach()
-
 file(COPY ${MY_DLL} DESTINATION ${EXECUTABLE_OUTPUT_PATH})
+
+file(GLOB MY_RES ${PROJECT_SOURCE_DIR}/res/*.*)
+foreach(res IN LISTS MY_RES)
+    message("Copy ${res}")
+endforeach()
+file(COPY ${MY_RES} DESTINATION ${EXECUTABLE_OUTPUT_PATH})
 
 include_directories(${PROJECT_SOURCE_DIR}/include/)
 include_directories(${PROJECT_SOURCE_DIR}/../glm/)

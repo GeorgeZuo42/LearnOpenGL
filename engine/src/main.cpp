@@ -7,7 +7,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include "utils.h"
+#include "utils.hpp"
 using namespace std;
 
 #define numVAOs 1
