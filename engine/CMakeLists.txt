@@ -15,6 +15,7 @@ endforeach()
 file(COPY ${MY_DLL} DESTINATION ${EXECUTABLE_OUTPUT_PATH})
 
 include_directories(${PROJECT_SOURCE_DIR}/include/)
+include_directories(${PROJECT_SOURCE_DIR}/../glm/)
 link_directories(${PROJECT_SOURCE_DIR}/lib/)
 
 # file(GLOB SOURCES "src/*.cpp")
