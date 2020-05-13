@@ -12,7 +12,7 @@
             "program": "${command:cmake.launchTargetPath}",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${command:cmake.launchTargetPath}/../",
+            "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
             "internalConsoleOptions": "openOnSessionStart"
