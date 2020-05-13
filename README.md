@@ -8,3 +8,6 @@
 ### C/C++ (用于语法提示)
 ### CMake (用于语法提示)
 ### CMake Tools (用于在VSCode里执行CMake等操作)
+
+## 效果示意图
+![image](https://github.com/GeorgeZuo42/LearnOpenGL/blob/master/engine/example/1.gif )
