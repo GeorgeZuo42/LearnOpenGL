@@ -82,7 +82,7 @@ void display(GLFWwindow *window, double currentTime)
 	// adjust OpenGL settings and draw model
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
-	glDrawArraysInstanced(GL_TRIANGLES, 0, 36,10000);
+	glDrawArraysInstanced(GL_TRIANGLES, 0, 36,100000);
 }
 GLFWwindow *createWindow(int width, int height, const char *name)
 {
@@ -124,9 +124,9 @@ GLuint createShader(const char *filePath, GLenum type)
 
 GLuint createShaderProgram()
 {
-	GLuint vShader = createShader("res/vertShader.glsl",
+	GLuint vShader = createShader("vertShader.glsl",
 								  GL_VERTEX_SHADER);
-	GLuint fShader = createShader("res/fragShader.glsl",
+	GLuint fShader = createShader("fragShader.glsl",
 								  GL_FRAGMENT_SHADER);
 	GLint linked;
 	GLuint shaderProgram = glCreateProgram();

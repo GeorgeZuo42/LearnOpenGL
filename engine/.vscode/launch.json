@@ -1,21 +1,60 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    // ref https://github.com/microsoft/vscode/issues/8706
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug",
+            "name": "VS调试",
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${command:cmake.launchTargetPath}",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${command:cmake.launchTargetDirectory}",
             "environment": [],
             "externalConsole": false,
             "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "gdb调试",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${command:cmake.launchTargetDirectory}",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "$PATH:${command:cmake.launchTargetDirectory}"
+                },
+            ],
+            "externalConsole": true,
+            "internalConsoleOptions": "openOnSessionStart",
+            "linux": {
+                "miDebuggerPath": "/usr/bin/gdb",
+                "MIMode": "gdb",
+                "setupCommands": [
+                    {
+                        "description": "Enable pretty-printing for gdb",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true
+                    }
+                ]
+            },
+            "osx": {
+                "MIMode": "lldb"
+            },
+            "windows": {
+                "miDebuggerPath": "path/to/gdb",
+                "MIMode": "gdb",
+                "setupCommands": [
+                    {
+                        "description": "Enable pretty-printing for gdb",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true
+                    }
+                ]
+            }
+
         }
     ]
 }

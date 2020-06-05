@@ -1,35 +1,36 @@
-cmake_minimum_required(VERSION 3.7.0)
-project(engine VERSION 0.1.0)
+#project config
+set(ProjectName "engine")
+set(ProjectVersion "0.1.0")
+#cmake config
+cmake_minimum_required(VERSION 3.7)
+project(${ProjectName} VERSION ${ProjectVersion})
+##format the vs project
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${ProjectName})
 
-include(CTest)
-enable_testing()
-
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
-
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
-
-file(GLOB MY_DLL ${PROJECT_SOURCE_DIR}/lib/*.dll)
-foreach(dll IN LISTS MY_DLL)
-    message("Copy ${dll}")
-endforeach()
-file(COPY ${MY_DLL} DESTINATION ${EXECUTABLE_OUTPUT_PATH})
-
-file(GLOB MY_RES ${PROJECT_SOURCE_DIR}/res/*.*)
-foreach(res IN LISTS MY_RES)
-    message("Copy ${res}")
-endforeach()
-file(COPY ${MY_RES} DESTINATION ${EXECUTABLE_OUTPUT_PATH})
-
+#set source
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY  ${PROJECT_SOURCE_DIR}/bin)
 include_directories(${PROJECT_SOURCE_DIR}/include/)
 include_directories(${PROJECT_SOURCE_DIR}/../glm/)
-link_directories(${PROJECT_SOURCE_DIR}/lib/)
-
-# file(GLOB SOURCES "src/*.cpp")
-add_executable(engine src/main.cpp)
-
-target_link_libraries(engine glew32)
-target_link_libraries(engine glfw3dll)
-target_link_libraries(engine opengl32)
+link_directories(${PROJECT_SOURCE_DIR}/libs/)
+#linking
+add_executable(${ProjectName} src/main.cpp)
+target_link_libraries(${ProjectName} glew32)
+target_link_libraries(${ProjectName} glfw3dll)
+target_link_libraries(${ProjectName} opengl32)
+#ctest
+enable_testing()
+include(CTest)
+include(CPack)
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
+#post
+
+
+set_property(TARGET ${ProjectName} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY $<TARGET_FILE_DIR:${ProjectName}>)
+add_custom_command(
+    TARGET ${ProjectName} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/libs/ $<TARGET_FILE_DIR:${ProjectName}>
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/res/ $<TARGET_FILE_DIR:${ProjectName}>
+    COMMENT "Copying libs and res" VERBATIM)
